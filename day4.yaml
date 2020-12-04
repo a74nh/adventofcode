@@ -1,0 +1,33 @@
+
+
+"byr":
+  "type": "year"
+  "range": { "min": 1920, "max": 2002 }
+
+"iyr":
+  "type": "year"
+  "range": { "min": 2010, "max": 2020 }
+
+
+"eyr":
+  "type": "year"
+  "range": { "min": 2020, "max": 2030 }
+
+"hgt":
+  "type": "length"
+  "range":
+    "cm": { "min": 150, "max": 193 }
+    "in": { "min": 59, "max": 76 }
+
+"hcl":
+  "type": "hex"
+  "range": {"size": 6}
+
+"ecl":
+  "type": "name_color"
+  "range": ["amb","blu","brn","gry","grn","hzl","oth"]
+
+"pid":
+  "type": "dec"
+  "range": {"size": 9}
+
