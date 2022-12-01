@@ -1,16 +1,33 @@
 namespace AdventOfCode.csharp2022.Day01;
 
-class Solution : Solver<int[]> {
+class Solution : Solver<List<List<int>>>
+{
+    //Couldnt find a way to LINQ this.
+    public override List<List<int>> Parse(string[] input)
+    {
+        List<List<int>> elves = new List<List<int>>();
+        elves.Add(new List<int>());
 
-    public int Count(int[] input)
-        => input.Zip(input.Skip(1), (x, y) => y > x).Where(c => c).Count();
+        foreach(string line in input)
+        {
+            try
+            {
+                elves.Last().Add(int.Parse(line));
+            }
+            catch (Exception)
+            {
+                elves.Add(new List<int>());
+            }
+        }
+        return elves;
+    }
 
-    public override int[] Parse(string[] input) => Array.ConvertAll(input, int.Parse);
+    private IEnumerable<int> CalsPerElf(List<List<int>> input)
+        => input.Select(list => list.Sum());
 
-    public override int DoPartOne(int[] input) => Count(input);
+    public override int DoPartOne(List<List<int>> input)
+        => CalsPerElf(input).Max();
 
-    public override int DoPartTwo(int[] input)
-        => Count(input.Zip(input.Skip(1), input.Skip(2))
-                        .Select(i => i.First+i.Second+i.Third)
-                        .ToArray());
+    public override int DoPartTwo(List<List<int>> input)
+        => CalsPerElf(input).OrderByDescending(i => i).Take(3).Sum();
 }
