@@ -1,11 +1,13 @@
 namespace AdventOfCode.csharp2022.Day01;
 
-class Solution : Solver<List<List<int>>>
+using ParsedData = List<List<int>>;
+
+class Solution : Solver<ParsedData>
 {
     //Couldnt find a way to LINQ this.
-    public override List<List<int>> Parse(string[] input)
+    public override ParsedData Parse(string[] input)
     {
-        List<List<int>> elves = new List<List<int>>();
+        ParsedData elves = new ParsedData();
         elves.Add(new List<int>());
 
         foreach(string line in input)
@@ -22,12 +24,12 @@ class Solution : Solver<List<List<int>>>
         return elves;
     }
 
-    private IEnumerable<int> CalsPerElf(List<List<int>> input)
+    private IEnumerable<int> CalsPerElf(ParsedData input)
         => input.Select(list => list.Sum());
 
-    public override int DoPartOne(List<List<int>> input)
+    public override int DoPartOne(ParsedData input)
         => CalsPerElf(input).Max();
 
-    public override int DoPartTwo(List<List<int>> input)
+    public override int DoPartTwo(ParsedData input)
         => CalsPerElf(input).OrderByDescending(i => i).Take(3).Sum();
 }

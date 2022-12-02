@@ -16,13 +16,18 @@ curl -b session=$(cat ${HOME}/.aocrc) https://adventofcode.com/${YEAR}/day/${DAY
 cat <<EOF > src/Day$EXDAY.cs
 namespace AdventOfCode.csharp2022.Day$EXDAY;
 
-class Solution : Solver<int[]> {
+using ParsedData = string[];
 
-    public override int[] Parse(string[] input);
+class Solution : Solver<ParsedData> {
 
-    public override int DoPartOne(int[] input);
+    public override ParsedData Parse(string[] input)
+        => input;
 
-    public override int DoPartTwo(int[] input);
+    public override int DoPartOne(ParsedData input)
+        => -1;
+
+    public override int DoPartTwo(ParsedData input)
+        => -1;
 }
 
 EOF
