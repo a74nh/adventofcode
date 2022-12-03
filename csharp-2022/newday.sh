@@ -10,7 +10,7 @@ DAY=$1
 EXDAY=$(printf "%02d" $1)
 YEAR=2022
 
-curl -b session=$(cat ${HOME}/.aocrc) https://adventofcode.com/${YEAR}/day/${DAY}/input > input/day$EXDAY.txt
+# curl -b session=$(cat ${HOME}/.aocrc) https://adventofcode.com/${YEAR}/day/${DAY}/input > input/day$EXDAY.txt
 
 
 cat <<EOF > src/Day$EXDAY.cs
