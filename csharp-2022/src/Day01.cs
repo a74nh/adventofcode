@@ -2,7 +2,7 @@ namespace AdventOfCode.csharp2022.Day01;
 
 using ParsedData = List<List<int>>;
 
-class Solution : Solver<ParsedData>
+class Solution : Solver<ParsedData, int>
 {
     //Couldnt find a way to LINQ this.
     public override ParsedData Parse(string[] input)

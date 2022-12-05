@@ -7,7 +7,7 @@ using Move = Tuple<int, int, int>;
 using Moves = List<Tuple<int, int, int>>;
 using ParsedData = Tuple<List<List<char>>, List<Tuple<int, int, int>>>;
 
-class Solution : Solver<ParsedData> {
+class Solution : Solver<ParsedData, string> {
 
     private void AddToCol(ref Board board, int col, char entry)
     {
@@ -101,29 +101,19 @@ class Solution : Solver<ParsedData> {
         }
     }
 
-    public override int DoPartOne(ParsedData input)
+    public override string DoPartOne(ParsedData input)
     {
         var board = input.Item1;
         var moves = input.Item2;
-        foreach(Move move in moves)
-        {
-            DoMove9000(ref board, move.Item1, move.Item2, move.Item3);
-        }
-        string ret = new string(board.Select(col => col[col.Count-1]).ToArray());
-        System.Console.WriteLine(ret);
-        return -1;
+        moves.ForEach(move => DoMove9000(ref board, move.Item1, move.Item2, move.Item3));
+        return new string(board.Select(col => col[col.Count-1]).ToArray());
     }
 
-    public override int DoPartTwo(ParsedData input)
+    public override string DoPartTwo(ParsedData input)
     {
         var board = input.Item1;
         var moves = input.Item2;
-        foreach(Move move in moves)
-        {
-            DoMove9001(ref board, move.Item1, move.Item2, move.Item3);
-        }
-        string ret = new string(board.Select(col => col[col.Count-1]).ToArray());
-        System.Console.WriteLine(ret);
-        return -1;
+        moves.ForEach(move => DoMove9001(ref board, move.Item1, move.Item2, move.Item3));
+        return new string(board.Select(col => col[col.Count-1]).ToArray());
     }
 }

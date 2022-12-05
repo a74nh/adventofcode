@@ -2,7 +2,7 @@ namespace AdventOfCode.csharp2022.Day02;
 
 using ParsedData = List<Tuple<int,int>>;
 
-class Solution : Solver<ParsedData> {
+class Solution : Solver<ParsedData, int> {
 
     public override ParsedData Parse(string[] input)
         => input.Select(line => new Tuple<int, int>(line[0]-'A', line[2]-'X')).ToList();

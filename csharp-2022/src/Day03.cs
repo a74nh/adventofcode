@@ -3,7 +3,7 @@ namespace AdventOfCode.csharp2022.Day03;
 using RuckSack = Tuple<List<int>,List<int>>;
 using ParsedData = List<List<int>>;
 
-class Solution : Solver<ParsedData> {
+class Solution : Solver<ParsedData, int> {
 
     private int ItemToPriority(char item)
         => item - ((item >= 'a') ? 'a' : 'A' - 26) + 1;

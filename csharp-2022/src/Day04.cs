@@ -4,7 +4,7 @@ namespace AdventOfCode.csharp2022.Day04;
 
 using ParsedData = List<List<int>>;
 
-class Solution : Solver<ParsedData> {
+class Solution : Solver<ParsedData, int> {
 
     public override ParsedData Parse(string[] input)
     {
