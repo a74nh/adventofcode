@@ -6,6 +6,9 @@ using ParsedData = List<List<int>>;
 
 class Solution : Solver<ParsedData, int> {
 
+    public override int testResultPartOne { get{return 2;} }
+    public override int testResultPartTwo { get{return 4;} }
+
     public override ParsedData Parse(string[] input)
     {
         Regex regex = new Regex(@"\D+");

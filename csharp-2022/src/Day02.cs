@@ -4,6 +4,9 @@ using ParsedData = List<Tuple<int,int>>;
 
 class Solution : Solver<ParsedData, int> {
 
+    public override int testResultPartOne { get{return 15;} }
+    public override int testResultPartTwo { get{return 12;} }
+
     public override ParsedData Parse(string[] input)
         => input.Select(line => new Tuple<int, int>(line[0]-'A', line[2]-'X')).ToList();
 

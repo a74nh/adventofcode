@@ -5,6 +5,9 @@ using ParsedData = List<List<int>>;
 
 class Solution : Solver<ParsedData, int> {
 
+    public override int testResultPartOne { get{return 157;} }
+    public override int testResultPartTwo { get{return 70;} }
+
     private int ItemToPriority(char item)
         => item - ((item >= 'a') ? 'a' : 'A' - 26) + 1;
 

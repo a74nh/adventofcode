@@ -9,6 +9,9 @@ using ParsedData = Tuple<List<List<char>>, List<Tuple<int, int, int>>>;
 
 class Solution : Solver<ParsedData, string> {
 
+    public override string testResultPartOne { get{return "CMZ";} }
+    public override string testResultPartTwo { get{return "MCD";} }
+
     private void AddToCol(ref Board board, int col, char entry)
     {
         List<char> column;

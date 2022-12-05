@@ -84,14 +84,18 @@ class Runner {
 
         var watch = new System.Diagnostics.Stopwatch();
         watch.Start();
-        System.Console.WriteLine(solve.PartOne(input));
+        var res = solve.PartOne(input);
         watch.Stop();
+        System.Console.WriteLine(res);
+        if (test) System.Console.WriteLine("{0}", solve.CheckTestPartOne(res)?"PASS":"FAIL" );
         if (benchmark) Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
         watch.Reset();
         watch.Start();
-        System.Console.WriteLine(solve.PartTwo(input));
-        watch.Stop();
+        res = solve.PartTwo(input);
+        System.Console.WriteLine(res);
+        if (test) System.Console.WriteLine("{0}", solve.CheckTestPartTwo(res)?"PASS":"FAIL" );
         if (benchmark) Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
+        watch.Stop();
         return 0;
     }
 

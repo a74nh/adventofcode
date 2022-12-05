@@ -4,6 +4,9 @@ using ParsedData = List<List<int>>;
 
 class Solution : Solver<ParsedData, int>
 {
+    public override int testResultPartOne { get{return 24000;} }
+    public override int testResultPartTwo { get{return 45000;} }
+
     //Couldnt find a way to LINQ this.
     public override ParsedData Parse(string[] input)
     {
