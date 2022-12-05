@@ -15,8 +15,11 @@ class Runner {
         [Option('t', "test", Required = false, HelpText = "Use test input.")]
         public bool Test { get; set; }
 
-		[Option('d', "download", Required = false, HelpText = "Download input.")]
+        [Option('d', "download", Required = false, HelpText = "Download input.")]
         public bool Download { get; set; }
+
+        [Option('b', "benchmark", Required = false, HelpText = "Benchmark.")]
+        public bool Benchmark { get; set; }
     }
 
     static void Main(string[] args)
@@ -24,33 +27,33 @@ class Runner {
         Parser.Default.ParseArguments<CommandLineOptions>(args)
             .WithParsed( opts =>
             {
-				if (opts.Download)
-				{
+                if (opts.Download)
+                {
                     var task = Download(opts.Day);
-					task.Wait();
-				}
+                    task.Wait();
+                }
                 else if (opts.Day == 0)
                 {
                     int day = 1;
                     int success;
                     do
                     {
-                        System.Console.WriteLine("Day {0}:", day);
-                        success = Solve(day++, opts.Test);
+                        System.Console.WriteLine("\nDay {0}:", day);
+                        success = Solve(day++, opts.Test, opts.Benchmark);
                     }
                     while (success == 0);
                 }
-				else
-				{
-					Solve(opts.Day, opts.Test);
-				}
+                else
+                {
+                    Solve(opts.Day, opts.Test, opts.Benchmark);
+                }
             });
     }
 
     static string InputFileName(int day, bool test)
         => string.Format("input/day{0:00}{1}.txt", day, test ? "_test" : "");
 
-    private static int Solve(int day, bool test)
+    private static int Solve(int day, bool test, bool benchmark)
     {
         string[] input;
         try
@@ -79,13 +82,21 @@ class Runner {
             return -1;
         }
 
+        var watch = new System.Diagnostics.Stopwatch();
+        watch.Start();
         System.Console.WriteLine(solve.PartOne(input));
+        watch.Stop();
+        if (benchmark) Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
+        watch.Reset();
+        watch.Start();
         System.Console.WriteLine(solve.PartTwo(input));
+        watch.Stop();
+        if (benchmark) Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
         return 0;
     }
 
-	private static async Task Download(int day)
-	{
+    private static async Task Download(int day)
+    {
         // Get session id.
         string[] sessionid;
         string sessionFileName = string.Format("{0}/.aocrc", Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
@@ -157,6 +168,6 @@ class Runner {
             File.Copy(templateFile, sourceFile);
             Console.WriteLine("Created source file {0}", sourceFile);
         }
-	}
+    }
 
 }
