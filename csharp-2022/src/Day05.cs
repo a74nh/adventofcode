@@ -21,51 +21,33 @@ class Solution : Solver<ParsedData, string> {
             board.Add(new List<char>());
             column = board[col];
         }
-        if (entry == ' ')
-        {
-            return;
-        }
-        column.Add(entry);
+        if (entry != ' ') column.Add(entry);
     }
 
     public override ParsedData Parse(string[] input)
     {
         var board = new Board();
         var moves = new Moves();
-        bool moveSection = false;
         Regex regex = new Regex(@"\D+");
         
         foreach(string line in input)
         {
-            if (string.IsNullOrEmpty(line) || line[1]=='1')
+            if (string.IsNullOrEmpty(line) || line[1]=='1') continue;
+
+            if (line[0]=='m')
             {
-                moveSection = true;
-            }
-            else if (!moveSection)
-            {
-                // Parse board row.
-                int col = 0;
-                int pos = 1;
-                while(true)
-                {
-                    try
-                    {
-                        AddToCol(ref board, col, line[pos]);
-                        col++;
-                        pos+=4;
-                    }
-                    catch (System.IndexOutOfRangeException)
-                    {
-                        break;
-                    }
-                }
-            }
-            else
-            {
+                // Parse move.
                 List<int> split = regex.Split(line)
                                     .Where(i => !string.IsNullOrEmpty(i))
                                     .Select(i => int.Parse(i)).ToList();
                 moves.Add(new Move(split[0], split[1], split[2]));
+            }
+            else
+            {
+                // Parse board row.
+                int pos = 1;
+                for(int col=0; pos<line.Length; col++, pos+=4)
+                    AddToCol(ref board, col, line[pos]);
             }
         }
 
@@ -75,7 +57,7 @@ class Solution : Solver<ParsedData, string> {
 
     public void DoMove9000(ref Board board, int num, int from, int to)
     {
-        while (num > 0)
+        for (; num > 0; num--)
         {
             // Remove.
             int last = board[from-1].Count - 1;
@@ -83,13 +65,12 @@ class Solution : Solver<ParsedData, string> {
             board[from-1].RemoveAt(last);
             // Add.
             board[to-1].Add(piece);
-            num--;
         }
     }
 
     public void DoMove9001(ref Board board, int num, int from, int to)
     {
-        while (num > 0)
+        for (; num > 0; num--)
         {
             // Remove.
             int last = board[from-1].Count - num;
@@ -97,22 +78,19 @@ class Solution : Solver<ParsedData, string> {
             board[from-1].RemoveAt(last);
             // Add.
             board[to-1].Add(piece);
-            num--;
         }
     }
 
     public override string DoPartOne(ParsedData input)
     {
-        var board = input.Item1;
-        var moves = input.Item2;
+        var (board,moves) = input;
         moves.ForEach(move => DoMove9000(ref board, move.Item1, move.Item2, move.Item3));
         return new string(board.Select(col => col[col.Count-1]).ToArray());
     }
 
     public override string DoPartTwo(ParsedData input)
     {
-        var board = input.Item1;
-        var moves = input.Item2;
+        var (board,moves) = input;
         moves.ForEach(move => DoMove9001(ref board, move.Item1, move.Item2, move.Item3));
         return new string(board.Select(col => col[col.Count-1]).ToArray());
     }
