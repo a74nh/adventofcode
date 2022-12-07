@@ -4,8 +4,8 @@ using ParsedData = List<string>;
 
 class Solution : Solver<ParsedData, int> {
 
-    public override int testResultPartOne { get{return 24000;} }
-    public override int testResultPartTwo { get{return 45000;} }
+    public override int testResultPartOne { get{return -1;} }
+    public override int testResultPartTwo { get{return -1;} }
 
     public override ParsedData Parse(string[] input)
         => input.ToList();
