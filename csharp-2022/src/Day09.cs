@@ -105,7 +105,8 @@ class Solution : Solver<ParsedData, int> {
     }
 
     public override int DoPartOne(ParsedData input)
-        => DoKnots(input, 2);
+    => -1;
+        // => DoKnots(input, 2);
 
     public override int DoPartTwo(ParsedData input)
         => DoKnots(input, 10);
