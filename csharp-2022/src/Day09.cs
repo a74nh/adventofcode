@@ -99,9 +99,40 @@ class Solution : Solver<ParsedData, int> {
                     knots[x] = AddPoints(knots[x], dir);
                 }
                 tailPositions.Add(knots[totKnots-1]);
+
+                Console.WriteLine("{0} {1}",dist,command.Item1);
+
+                PrintKnots(knots);
             }
         }
         return tailPositions.Count();
+    }
+
+    public void PrintKnots(List<Point> knots)
+    {
+        Point min = new Point(0,-4);
+        Point max = new Point(5,0);
+        for(int y=min.Y; y<=max.Y; y++)
+        {
+            for(int x=min.X; x<=max.X; x++)
+                Console.Write(knots.Contains(new Point(x,y))?"#":".");
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
+
+
+    public void PrintTailPositions(HashSet<Point> tailPositions)
+    {
+        Point min = new Point(0,-4);
+        Point max = new Point(5,0);
+        for(int y=min.Y; y<=max.Y; y++)
+        {
+            for(int x=min.X; x<=max.X; x++)
+                Console.Write(tailPositions.Contains(new Point(x,y))?"#":".");
+            Console.WriteLine();
+        }
+        Console.WriteLine();
     }
 
     public override int DoPartOne(ParsedData input)
